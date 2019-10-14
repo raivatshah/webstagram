@@ -9,12 +9,12 @@ from itertools import islice
 import sys
 import json
 
-
+# Get Data from React App
 with open("client/public/data.json") as f:
     data = json.loads(f.read())
 
-print(data)
-# Get Key Info
+
+# Get Key Info from the Data
 emailID = data["email"]
 INSTAUSERNAME = data["url"]
 about = data["aboutUs"]
@@ -101,7 +101,7 @@ def main():
     from email.mime.base import MIMEBase 
     from email import encoders 
 
-    fromaddr = "raivat.s2@gmail.com"
+    fromaddr = "example@example.com"
     toaddr = emailID
     # instance of MIMEMultipart 
     msg = MIMEMultipart() 
@@ -132,22 +132,11 @@ def main():
     # start TLS for security 
     s.starttls() 
     # Authentication 
-    s.login(fromaddr, "iNTUtion@2019") 
+    s.login(fromaddr, "*********") 
     # Converts the Multipart msg into a string 
     text = msg.as_string() 
     # sending the mail 
     s.sendmail(fromaddr, toaddr, text) 
     # terminating the session 
     s.quit() 
-
-    # #Delete All Generated Images (for better reuse of code)
-    # folder = 'output/img/'
-    # for the_file in os.listdir(folder):
-    #     file_path = os.path.join(folder, the_file)
-    #     try:
-    #         if os.path.isfile(file_path):
-    #             os.unlink(file_path)
-    #     except Exception as e:
-    #         print(e)
-
 main()
